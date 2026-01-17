@@ -8,17 +8,19 @@ const getSidebarUsers = async (req, res) => {
   try {
     const userId = req.user._id
 
-    const filteredUser = await User.find({ _id: { ne: userId } }).select("-password");
+    const filteredUser = await User.find({ _id: { $ne: userId } }).select("-password");
 
     const unseenMsg = []
     const promises = filteredUser.map(async (user) => {
       const messages = await Message.find({ senderId: user._id, receiverId: userId },
         { seen: false })
-      if (messages.length > 0) unseenMsg[user._id] = message.length
+      if (messages.length > 0) unseenMsg[user._id] = messages.length
     })
 
     // waits unit all the promises gets executed 
     await Promise.all(promises)
+
+    res.json({success : true, users : filteredUser, unseenMsg})
   } catch (err) {
     console.log(err.message)
     res.json({ success: false, message: err.message })
