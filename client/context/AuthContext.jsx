@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }) => {
     setOnlineUsers([])
     axios.defaults.headers.common["token"] = null
     toast.success("Logged Out Successfully")
-    socket.disconnect()
+    if (socket) socket.disconnect()
   }
 
   const noTokenlogout = async () => {
@@ -85,7 +85,7 @@ export const AuthProvider = ({ children }) => {
     setAuthUser(null)
     setOnlineUsers([])
     axios.defaults.headers.common["token"] = null
-    socket.disconnect()
+    if (socket) socket.disconnect()
   }
 
   const updateProfile = async (body) => {
