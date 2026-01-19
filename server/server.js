@@ -13,7 +13,7 @@ const server = http.createServer(app)
 
 // socket
 export const io = new Server(server, {
-  cors : {origin : "*"}
+  cors: { origin: process.env.CORS_ORIGIN }
 })
 
 // store online users
@@ -25,7 +25,7 @@ io.on("connection", (socket) => {
   const userId = socket.handshake.query.userId
   console.log("User Connected", userId)
 
-  if(userId) userSocketMap[userId] = socket.id
+  if (userId) userSocketMap[userId] = socket.id
 
   io.emit("getOnlineUsers", Object.keys(userSocketMap))
 
@@ -38,9 +38,9 @@ io.on("connection", (socket) => {
 
 app.use(express.json({ limit: "4mb" }))
 app.use(cors({
-  origin : "*",
-  methods : ["GET", "POST", "PUT", "DELETE"],
-  credentials : false
+  origin: process.env.CORS_ORIGIN,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: false
 }))
 
 app.use("/api/status", (req, res) => {
