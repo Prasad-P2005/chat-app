@@ -5,6 +5,9 @@ import protectRoute from "../middlewares/protectRoute.middleware.js"
 const userRouter = express.Router()
 
 userRouter.post("/signup", signupUser)
+userRouter.get("/login", (req, res) => {
+  res.json({message : "Enter Credentials For Login User."})
+})
 userRouter.post("/login", loginUser)
 userRouter.put("/update", protectRoute, updateProfile)
 
