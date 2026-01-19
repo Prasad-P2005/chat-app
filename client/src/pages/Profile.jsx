@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import assets from '../assets/assets.js'
 import { AuthContext } from '../../context/AuthContext.jsx'
+import toast from 'react-hot-toast'
 
 const Profile = () => {
 
@@ -13,7 +14,6 @@ const Profile = () => {
   const [bio, setBio] = useState(authUser.bio)
 
   const handelSubmit = async (e) => {
-
     e.preventDefault()
 
     if (!selectedImg) {
@@ -26,7 +26,15 @@ const Profile = () => {
     reader.readAsDataURL(selectedImg)
     reader.onload = async () => {
       const base64Image = reader.result
-      await updateProfile({ profilePic: base64Image, fullName: name, bio })
+      toast.promise(
+        async () => {
+          await updateProfile({ profilePic: base64Image, fullName: name, bio })
+        },
+        {
+          loading : "This Will Take Some Time",
+          success : "Profile Pic Uploaded Successfully."
+        }
+      );
       navigate("/")
     }
   }
@@ -43,7 +51,7 @@ const Profile = () => {
         <form onSubmit={handelSubmit} className="flex flex-col gap-5 p-9 flex-1">
 
           <div className='flex items-center gap-3'>
-            <img src={assets.arrow_icon} className='w-5 h-5 cursor-pointer' onClick={() => {navigate("/")}}/>
+            <img src={assets.arrow_icon} className='w-5 h-5 cursor-pointer' onClick={() => { navigate("/") }} />
             {/* Profile details section */}
             <h3 className='text-lg'>Profile details</h3>
           </div>
