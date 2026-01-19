@@ -49,6 +49,9 @@ app.use("/api/status", (req, res) => {
 
 app.use("/api/auth", userRouter)
 app.use("/api/messages", messgaeRouter)
+app.get("/login", (req, res) => {
+  res.json({message : "Enter Credentials For Login User."})
+})
 
 await connectToDB();
 
