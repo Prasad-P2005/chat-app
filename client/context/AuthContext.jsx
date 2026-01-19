@@ -101,7 +101,6 @@ export const AuthProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    console.log("Auth Context Loaded")
     if (token) {
       axios.defaults.headers.common["token"] = token
     } else {

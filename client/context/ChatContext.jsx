@@ -76,7 +76,6 @@ const ChatProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    console.log("Chat Context is Loaded")
     subscribeToMessages();
     return () => unsubscribeFromMessages();
   }, [socket, selectedUser])
