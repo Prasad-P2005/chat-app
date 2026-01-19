@@ -26,7 +26,7 @@ const Profile = () => {
     reader.readAsDataURL(selectedImg)
     reader.onload = async () => {
       const base64Image = reader.result
-      toast.promise(
+      await toast.promise(
         async () => {
           await updateProfile({ profilePic: base64Image, fullName: name, bio })
         },
