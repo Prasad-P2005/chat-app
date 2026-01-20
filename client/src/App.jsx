@@ -6,7 +6,7 @@ import Profile from './pages/Profile'
 import { Toaster } from "react-hot-toast"
 import { useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
 
 const App = () => {
 
