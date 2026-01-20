@@ -8,14 +8,12 @@ import ChatProvider from '../context/ChatContext.jsx'
 import { Analytics } from "@vercel/analytics/next"
 
 createRoot(document.getElementById('root')).render(
-  <div>
-    <BrowserRouter>
-      <AuthProvider>
-        <ChatProvider>
-          <App />
-        </ChatProvider>
-      </AuthProvider>
-    </BrowserRouter>
-    <Analytics />
-  </div>
+  <BrowserRouter>
+    <AuthProvider>
+      <ChatProvider>
+        <App />
+        <Analytics />
+      </ChatProvider>
+    </AuthProvider>
+  </BrowserRouter>
 )
