@@ -59,7 +59,7 @@ const ChatContainer = () => {
       <div className='flex items-center gap-3 py-3 mx-4 border-b border-stone-500'>
 
         {/* profile pic */}
-        <img  src={selectedUser.profilePic || assets.profile_martin} alt="" className='w-8 rounded-full' />
+        <img  src={selectedUser.profilePic || assets.avatar_icon} alt="" className='w-8 rounded-full' />
 
         {/* Name and status */}
         <p className='flex-1 text-lg text-white flex items-center gap-2'>
