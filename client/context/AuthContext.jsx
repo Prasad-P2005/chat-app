@@ -103,7 +103,7 @@ export const AuthProvider = ({ children }) => {
   const startServer = async () => {
     try {
       await toast.promise(
-        axios.get("/api/status"),
+        await axios.get("/api/status"),
         {
           loading: "Starting Server...",
           success: "Server Started",
