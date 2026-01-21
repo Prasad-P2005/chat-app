@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import assets from '../assets/assets'
 import { useContext } from 'react'
 import { AuthContext } from '../../context/AuthContext'
+import { useEffect } from 'react'
+import toast from 'react-hot-toast'
 
 const Login = () => {
 
@@ -12,7 +14,7 @@ const Login = () => {
   const [bio, setBio] = useState("")
   const [isDataSubmitted, setIsDataSubmitted] = useState(false)
 
-  const {login} = useContext(AuthContext)
+  const {login, axios} = useContext(AuthContext)
 
   const onSubmitHandler = (e) => {
     e.preventDefault()
@@ -24,7 +26,6 @@ const Login = () => {
 
     login(currState == "Sign Up" ? 'signup' : 'login', {fullName, email, password, bio})
   }
-
 
   return (
     <div className='min-h-screen bg-cover bg-center flex items-center

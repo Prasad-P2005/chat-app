@@ -100,7 +100,23 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  const startServer = async () => {
+    try {
+      await toast.promise(
+        axios.get("/api/status"),
+        {
+          loading: "Starting Server...",
+          success: "Server Started",
+          error: "Server Failed to Start"
+        }
+      )
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
   useEffect(() => {
+    startServer()
     if (token) {
       axios.defaults.headers.common["token"] = token
     } else {
