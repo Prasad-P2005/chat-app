@@ -12,6 +12,7 @@ const ChatProvider = ({ children }) => {
   const [users, setUsers] = useState([])
   const [selectedUser, setSelectedUser] = useState(null)
   const [unseenMessages, setUnseenMessages] = useState({})
+  const [showProfile, setShowProfile] = useState(false)
 
   const { socket, axios } = useContext(AuthContext)
 
@@ -81,7 +82,7 @@ const ChatProvider = ({ children }) => {
   }, [socket, selectedUser])
 
   const value = {
-    messages, users, selectedUser, getUsers, getMessages, sendMessage, setSelectedUser, unseenMessages, setUnseenMessages
+    messages, users, selectedUser, getUsers, getMessages, sendMessage, setSelectedUser, unseenMessages, setUnseenMessages, showProfile, setShowProfile
   }
 
   return (

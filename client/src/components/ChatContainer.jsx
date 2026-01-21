@@ -6,7 +6,7 @@ import { AuthContext } from '../../context/AuthContext.jsx'
 
 const ChatContainer = () => {
 
-  const { messages, selectedUser, sendMessage, getMessages } = useContext(ChatContext)
+  const { messages, selectedUser, sendMessage, getMessages, setShowProfile, showProfile} = useContext(ChatContext)
   const { authUser, onlineUsers } = useContext(AuthContext)
 
   const scrollEnd = useRef()
@@ -73,7 +73,7 @@ const ChatContainer = () => {
         />
 
         {/* Help icon */}
-        <img src={assets.help_icon} alt="" className='max-md:hidden max-w-5' />
+        <img src={assets.help_icon} onClick={() => setShowProfile(!showProfile)} alt="" className='max-md:hidden max-w-5' />
       </div>
 
       {/* chat area */}
