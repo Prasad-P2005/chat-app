@@ -91,7 +91,7 @@ const Login = () => {
 
         {/* terms and conditions */}
         {!isDataSubmitted && currState == "Sign Up" && (
-          <div className='flex items-center gap-2 text-sm text-gray-500'>
+          <div className='flex items-center gap-2 text-sm text-gray-700'>
             <input type="checkbox" required />
             <p>Agree to the terms of use and privacy policy</p>
           </div>
@@ -101,9 +101,9 @@ const Login = () => {
         {!isDataSubmitted && (
           <div className='flex flex-col gap-2'>
             {currState === "Sign Up" ? (
-              <p className='text-sm text-gray-600 flex gap-1 items-baseline'>
+              <p className='text-sm text-gray-800 flex gap-1 items-baseline'>
                 Already have an account ?
-                <span className='text-violet-500 font-medium cursor-pointer'
+                <span className='text-violet-800 font-medium cursor-pointer'
                   onClick={() => {
                     setCurrState("Login");
                     setIsDataSubmitted(false)
@@ -112,10 +112,10 @@ const Login = () => {
                 </span>
               </p>
             ) : (
-              <p className='text-sm text-gray-600'>
+              <p className='text-sm text-gray-800 flex gap-2'>
                 Don't have an account?
 
-                <span className='text-violet-500 font-medium cursor-pointer'
+                <span className='text-violet-800 font-medium cursor-pointer'
                   onClick={() => {
                     setCurrState("Sign Up");
                     setIsDataSubmitted(false);
