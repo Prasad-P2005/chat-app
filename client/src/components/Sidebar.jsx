@@ -7,7 +7,7 @@ import { ChatContext } from '../../context/ChatContext'
 
 const Sidebar = () => {
 
-  const { getUsers, users, selectedUser, setSelectedUser, unseenMessages, setUnseenMessages } = useContext(ChatContext)
+  const { getUsers, users, offlineUsers, allOnlineUsers, selectedUser, setSelectedUser, unseenMessages, setUnseenMessages } = useContext(ChatContext)
 
   const { logout, onlineUsers } = useContext(AuthContext)
 
@@ -15,7 +15,7 @@ const Sidebar = () => {
 
   const navigate = useNavigate()
 
-  const filteredUsers = input ? users.filter((user) => user.fullName.toLowerCase().includes(input.toLowerCase())) : users;
+  const filteredUsers = input ? users.filter((user) => user.fullName.toLowerCase().includes(input.toLowerCase())) : [...allOnlineUsers, ...offlineUsers];
 
   useEffect(() => {
     getUsers()

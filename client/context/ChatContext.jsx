@@ -13,8 +13,10 @@ const ChatProvider = ({ children }) => {
   const [selectedUser, setSelectedUser] = useState(null)
   const [unseenMessages, setUnseenMessages] = useState({})
   const [showProfile, setShowProfile] = useState(false)
+  const [offlineUsers, setOfflineUsers] = useState([])
+  const [allOnlineUsers, setAllOnlineUsers] = useState([])
 
-  const { socket, axios } = useContext(AuthContext)
+  const { socket, axios, onlineUsers } = useContext(AuthContext)
 
   // function to get all users from sidebar
   // all users gets all the users and unseenMessages of everyone gets here
@@ -23,6 +25,16 @@ const ChatProvider = ({ children }) => {
       const { data } = await axios.get("/api/messages/users")
       if (data.success) {
         setUsers(data.users)
+        setOfflineUsers(
+          // data.users.map((user, index) => {
+          // if(!(onlineUsers.includes(user._id))){
+          //   return user;
+          // }})
+          data.users.filter(user => !onlineUsers.includes(user._id))
+      )
+      setAllOnlineUsers(
+        data.users.filter(user => onlineUsers.includes(user._id))
+      )
         setUnseenMessages(data.unseenMsg)
       }
     } catch (error) {
@@ -31,7 +43,7 @@ const ChatProvider = ({ children }) => {
   }
 
   // function to get messages for selected users
-  
+
   const getMessages = async (userId) => {
     try {
       const { data } = await axios.get(`/api/messages/${userId}`)
@@ -59,13 +71,13 @@ const ChatProvider = ({ children }) => {
     if (!socket) return;
 
     socket.on("newMessage", (newMessage) => {
-      if(selectedUser && newMessage.senderId === selectedUser._id){
+      if (selectedUser && newMessage.senderId === selectedUser._id) {
         newMessage.seen = true
         setMessages((prevMessages) => [...prevMessages, newMessage])
         axios.put(`/api/messages/mark/${newMessage._id}`)
-      }else{
+      } else {
         setUnseenMessages((prevUnseenMessages) => ({
-          ...prevUnseenMessages, [newMessage.senderId] : prevUnseenMessages[newMessage.senderId] ? prevUnseenMessages[newMessage.senderId] + 1 : 1
+          ...prevUnseenMessages, [newMessage.senderId]: prevUnseenMessages[newMessage.senderId] ? prevUnseenMessages[newMessage.senderId] + 1 : 1
         }))
       }
     })
@@ -73,7 +85,7 @@ const ChatProvider = ({ children }) => {
 
   // function to unsubscribe from messages
   const unsubscribeFromMessages = () => {
-    if(socket) socket.off("newMessage");
+    if (socket) socket.off("newMessage");
   }
 
   useEffect(() => {
@@ -82,7 +94,8 @@ const ChatProvider = ({ children }) => {
   }, [socket, selectedUser])
 
   const value = {
-    messages, users, selectedUser, getUsers, getMessages, sendMessage, setSelectedUser, unseenMessages, setUnseenMessages, showProfile, setShowProfile
+    messages, users, selectedUser, getUsers, getMessages, sendMessage, setSelectedUser, unseenMessages, setUnseenMessages, showProfile, setShowProfile, offlineUsers,
+    allOnlineUsers
   }
 
   return (
