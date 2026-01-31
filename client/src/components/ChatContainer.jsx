@@ -6,7 +6,7 @@ import { AuthContext } from '../../context/AuthContext.jsx'
 
 const ChatContainer = () => {
 
-  const { messages, selectedUser, sendMessage, getMessages, setShowProfile, showProfile} = useContext(ChatContext)
+  const { messages, selectedUser, setSelectedUser, sendMessage, getMessages, setShowProfile, showProfile} = useContext(ChatContext)
   const { authUser, onlineUsers } = useContext(AuthContext)
 
   const scrollEnd = useRef()

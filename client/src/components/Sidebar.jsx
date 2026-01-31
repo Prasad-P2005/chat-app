@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../../context/AuthContext'
 import { ChatContext } from '../../context/ChatContext'
+import { GithubIcon } from 'lucide-react'
 
 const Sidebar = () => {
 
@@ -30,6 +31,9 @@ const Sidebar = () => {
 
         {/* Navbar of the sidebar */}
         <div className="flex justify-between items-center">
+          <a target='_blank' href="https://github.com/Prasad-P2005/chat-app">
+            <GithubIcon />
+          </a>
           {/* logo of navbar of sidebar */}
           <img src={assets.logo} alt="logo" className="max-w-40" />
 
@@ -47,9 +51,9 @@ const Sidebar = () => {
               <p className='cursor-pointer text-sm' >Logout</p>
             </div> */}
             <div className='absolute top-full right-0 z-20 w-32 p-5 rounded-md bg-[#282142]
-  border border-gray-500 text-gray-100
-  opacity-0 transition-opacity duration-1000
-  group-hover:opacity-100 group-hover:duration-0'>
+                            border border-gray-500 text-gray-100
+                            opacity-0 transition-opacity duration-1000
+                            group-hover:opacity-100 group-hover:duration-0'>
               <p onClick={() => navigate("/profile")} className='cursor-pointer text-sm'>Edit Profile</p>
               <hr className="my-2 border-t border-gray-500" />
               <p onClick={logout} className='cursor-pointer text-sm'>Logout</p>
@@ -72,7 +76,7 @@ const Sidebar = () => {
         {filteredUsers.map((user, index) => (
           // single return of each user
 
-          <div onClick={() => { setSelectedUser(user), setUnseenMessages(prev => ({...prev, [user._id]:0}))}} key={index} className={`relative flex 
+          <div onClick={() => { setSelectedUser(user), setUnseenMessages(prev => ({ ...prev, [user._id]: 0 })) }} key={index} className={`relative flex 
           items-center gap-2 p-2 pl-4 rounded cursor-pointer max-sm:text-sm 
           // Selected user background gets a color
           ${selectedUser?._id === user._id && 'bg-[#282142]/50'}`}>

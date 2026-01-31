@@ -4,6 +4,8 @@ import { useContext } from 'react'
 import { AuthContext } from '../../context/AuthContext'
 import { useEffect } from 'react'
 import toast from 'react-hot-toast'
+import { Github, GithubIcon } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
 
@@ -14,7 +16,7 @@ const Login = () => {
   const [bio, setBio] = useState("")
   const [isDataSubmitted, setIsDataSubmitted] = useState(false)
 
-  const {login, axios} = useContext(AuthContext)
+  const { login, axios } = useContext(AuthContext)
 
   const onSubmitHandler = (e) => {
     e.preventDefault()
@@ -24,7 +26,7 @@ const Login = () => {
       return;
     }
 
-    login(currState == "Sign Up" ? 'signup' : 'login', {fullName, email, password, bio})
+    login(currState == "Sign Up" ? 'signup' : 'login', { fullName, email, password, bio })
   }
 
   return (
@@ -41,7 +43,7 @@ const Login = () => {
       >
 
         {/* form title & Back Button */}
-        <h2 className='flex items-center font-medium text-2xl justify-between'>{currState}
+        <h2 className='flex items-center font-medium text-2xl justify-between'>{currState}<a target="_blank" href="https://github.com/Prasad-P2005/chat-app"><GithubIcon /> </a>
           {isDataSubmitted &&
             <img src={assets.arrow_icon} className='w-5 cursor-pointer'
               onClick={() => setIsDataSubmitted(false)}
